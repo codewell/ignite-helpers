@@ -4,6 +4,7 @@ import torch_helpers
 
 
 def get_trainer(model, criterion, optimizer, config):
+    
     def train_step(engine, batch):
 
         model.train()
@@ -27,31 +28,10 @@ def get_trainer(model, criterion, optimizer, config):
             optimizer.step()
 
         return loss.item() * config['accumulation_steps']
-    
-    return train_step
-
-def get_evaluator(model):
-    def evaluate_step(engine, batch):
-
-        model.train()
-        batch = torch_helpers.batch_to_model_device(batch, model)
-        with torch.no_grad():
-            output = model(batch['features'])
-
-        return dict(
-            output=output,
-            targets=batch['targets'],
-        )
-    
-    return evaluate_step
-
-
-def get_trainer_and_evaluator(model, criterion, optimizer, config):
-    trainer = ignite.engine.Engine(get_trainer(model, criterion, optimizer, config))
-    evaluator = ignite.engine.Engine(get_evaluator(model))
-
+       
+    ignite.engine.Engine(train_step)
     ignite.metrics.RunningAverage(
         output_transform=lambda x: x, alpha=0.98
     ).attach(trainer, 'running avg loss')
-
-    return trainer, evaluator
+    
+    return trainer
