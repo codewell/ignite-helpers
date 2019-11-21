@@ -2,4 +2,4 @@
 Utility functions for PyTorch.
 
 ## Installation
-`pip install git+https://github.com/<to-be-defined>`
+`pip install git+https://github.com/codewell/ignite-helpers.git`
