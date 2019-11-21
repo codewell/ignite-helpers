@@ -12,6 +12,5 @@ setup(
    install_requires=[
        'torch',
        'pytorch-ignite',
-       'git+https://github.com/codewell/torch-helpers'
    ],
 )
