@@ -12,5 +12,9 @@ setup(
    install_requires=[
        'torch',
        'pytorch-ignite',
+       'tqdm',
+       'scikit-learn',
+       'tensorboard',
+       'torch-helpers @ https://github.com/codewell/torch-helpers/tarball/master#egg=torch-helpers-0.0.1'
    ],
 )
