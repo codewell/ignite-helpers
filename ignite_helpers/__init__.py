@@ -9,4 +9,5 @@ from .accuracy import Accuracy
 from .confusion_matrix import ConfusionMatrix
 from .attach_best_results_logger import attach_best_results_logger
 from .attach_output_handlers import attach_output_handlers
-from .get_trainer_and_evaluator import get_trainer_and_evaluator
+from .get_trainer import get_trainer
+from .get_evaluator import get_evaluator
