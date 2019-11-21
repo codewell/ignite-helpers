@@ -29,7 +29,7 @@ def get_trainer(model, criterion, optimizer, config):
 
         return loss.item() * config['accumulation_steps']
        
-    ignite.engine.Engine(train_step)
+    trainer = ignite.engine.Engine(train_step)
     ignite.metrics.RunningAverage(
         output_transform=lambda x: x, alpha=0.98
     ).attach(trainer, 'running avg loss')
