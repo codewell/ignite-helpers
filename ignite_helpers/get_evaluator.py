@@ -7,7 +7,7 @@ def get_evaluator(model):
     
     def evaluate_step(engine, batch):
 
-        model.train()
+        model.eval()
         batch = torch_helpers.batch_to_model_device(batch, model)
         with torch.no_grad():
             output = model(batch['features'])
