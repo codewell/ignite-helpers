@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 setup(
    name='ignite_helpers',
-   version='0.0.2',
+   version='0.0.3',
    description='Utility tools for PyTorch Ignite',
    author='Felix Abrahamsson',
    author_email='FelixAbrahamsson@github.com',
@@ -15,6 +15,6 @@ setup(
        'tqdm',
        'scikit-learn',
        'tensorboard',
-       'torch-helpers @ https://github.com/codewell/torch-helpers/tarball/master#egg=torch-helpers-0.0.1'
+       'torch-helpers @ https://github.com/codewell/torch-helpers/tarball/master#egg=torch-helpers-0.0.3'
    ],
 )
