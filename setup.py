@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 setup(
    name='ignite_helpers',
-   version='0.0.3',
+   version='0.0.4',
    description='Utility tools for PyTorch Ignite',
    author='Felix Abrahamsson',
    author_email='FelixAbrahamsson@github.com',
