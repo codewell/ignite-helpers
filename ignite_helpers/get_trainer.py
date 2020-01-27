@@ -8,14 +8,7 @@ def get_trainer(model, criterion, optimizer, config, track_loss=True):
     def train_step(engine, batch):
 
         model.train()
-        accumulation_steps = (
-            1 if 'accumulation_steps' not in config
-            else config['accumulation_steps']
-        )
-
-        if engine.state.iteration % accumulation_steps == 0:
-            optimizer.zero_grad()
-
+        accumulation_steps = config.get('accumulation_steps', 1)
         batch = torch_helpers.batch_to_model_device(batch, model)
         if 'mixup_alpha' in config and config['mixup_alpha'] > 0:
             batch = torch_helpers.mixup_batch(batch, alpha=config['mixup_alpha'])
@@ -24,11 +17,12 @@ def get_trainer(model, criterion, optimizer, config, track_loss=True):
         loss.backward()
 
         if engine.state.iteration % accumulation_steps == 0:
-            if 'clip_norm' in config and config['clip_norm']:
+            if config.get('clip_norm', 0.) > 0.:
                 torch.nn.utils.clip_grad_norm_(
                     model.parameters(), config['clip_norm']
                 )
             optimizer.step()
+            optimizer.zero_grad()
 
         return dict(loss=loss.item() * accumulation_steps)
 
